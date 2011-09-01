@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+<form action=/>
+    <label for=words>Slov:</label>&nbsp;<input type=search id=words name=words value={{words}} />
+    <input type=submit />
+    &nbsp;<a href="/faq">FAQ</a>
+</form>
+
+{% block content %}
+<h2>Followers overlap for
+    {% for account in data.accounts %}
+        <a href="http://www.twitter.com/{{ account }}">@{{ account }}</a>{%if not loop.last %}&nbsp;&amp;&nbsp;{% endif %}
+    {% endfor %}</h2>
+
+<form action="/" method="get">
+    <input type="text" name="accounts" placeholder="accounts separated with space" />
+    <input type="submit" />
+</form>
+
+<div id="graph">
+{% if venn %}
+    <canvas id="venn" width="500" height="500"></canvas>
+{% else %}
+    <div class="warning">Right now we can construct Venn diagrams only for 2-4 sets. But feel free to use the data anyway ;)</div>
+{% endif %}
+</div>
+        
+<table>
+    <tr><th>&nbsp;</th><th colspan="3">followers</th></tr>
+    <tr><th class="first">combination</th><th colspan="2">common</th><th>total unique</th></tr>
+    {% for one in data.combs %}
+        <tr><td class="first">{{ one.accounts }}</td><td class="num">{{ one.common_count }}</td><td class="num"><small>({{ one.ratio|round(2) }}%)</small></td><td class="num">{{ one.uniq }}</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

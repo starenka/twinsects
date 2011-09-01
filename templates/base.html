@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <title>twinsects :: {{title}}</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/screen.css') }}">
+    <!--[if IE]>
+    <script type="text/javascript" src="/static/js/canvasxpress/excanvas.js"></script><![endif]-->
+    <script type="text/javascript" src="/static/js/canvasxpress/canvasXpress.min.js"></script>
+    <script>
+        var spawn_chart = function () {
+            new CanvasXpress('venn',
+                    {venn: {{canvas|safe}} },
+                    {graphType: 'Venn',
+                        background: 'rgb(245,245,245)',
+                        vennGroups: {{venn_groups}},
+                        autoExtend: true});
+        }
+        var jumpTo = function(url) {
+            parent.location = url
+        }
+    </script>
+</head>
+<body {% if venn %}onload="spawn_chart();"{% endif %}>
+    <div id="content">
+        {% block content %}{% endblock %}
+        <div id="credits">
+            code by <a href="http://www.starenka.net" target="_blank">starenka</a> L.P. MMXI,
+            powered by <a href="http://flask.pocoo.org" target="_blank">Flask</a>&nbsp;&amp;&nbsp;<a
+                href="canvasxpress.org" target="_blank">CanvasExpress</a>
+        </div>
+    </div>
+</body>
+</html>
