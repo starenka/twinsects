@@ -7,6 +7,14 @@ td.first, th.first { text-align: left;}
 td.last, td.num, th.last, th.num { text-align: right; }
 tr { padding: 0; margin: 0;}
 
+a,
+a:visited
+a:active,
+a:hover
+{
+    color: blue;
+    text-decoration: none;
+}
 input { margin-right: 5px; }
 input[type=text] { width: 300px; }
 
