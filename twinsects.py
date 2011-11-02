@@ -55,7 +55,7 @@ def _get_followers(accounts):
         cached = cache.get(account)
         if cached is None:
             try:
-                data[account] = set(tweepy.API().followers_ids(account))
+                data[account] = set(tweepy.API().followers_ids(account)[0])
                 cache.set(account, data[account], timeout=app.config['CACHE_MINUTES'] * 60)
             except tweepy.error.TweepError:
                 pass
