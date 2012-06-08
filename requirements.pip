@@ -1,5 +1,5 @@
 Flask
 Flask-SQLAlchemy
 werkzeug
-tweepy
+tweepy==1.7.1
 simplejson
